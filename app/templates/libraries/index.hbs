@@ -1,0 +1,22 @@
+<h2>List</h2>
+
+<div class="row">
+  {{#each this.filteredList as |library|}}
+    <div class="col-md-4">
+      <LibraryItem @item={{library}} @badge={{library.books.length}}>
+        <LinkTo @route="libraries.edit" @model={{library.id}} class="btn btn-success btn-xs">Edit</LinkTo>
+        <button type="button" class="btn btn-danger btn-xs" {{on 'click' (fn this.deleteLibrary library)}}>Delete</button>
+      </LibraryItem>
+    </div>
+  {{else}}
+    {{#if this.model.isUpdating}}
+      <SpinnerCube />
+    {{else}}
+      <div class="col-md-12 text-center">
+        <div class="alert alert-info">
+          Sorry, no result.
+        </div>
+      </div>
+    {{/if}}
+  {{/each}}
+</div>
